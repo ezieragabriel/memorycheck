@@ -35,6 +35,7 @@ while getopts ":c:w:e:" opt;
 done
 shift "$((OPTIND-1))"
 
+# Checks if user provided the parameters and if critical threshold is greater than warning threshold
 if [ -z "${c}" ] || [ -z "${w}" ] || [ -z "${e}" ] || [ "${c}" -lt "${w}" ];
 then
   Usage
