@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# SE Exercise 1/2
+#BASH
+
+clear			# Clears screen
+Usage() {
+  echo
+  echo $"memory_check Parameters: -c, Critical threshold; -w, Warning threshold; -e, Recipient mail address" 1>&@;
+  echo exit 1;
+}
+#
+#
+#
+# MAIN OPERATION
+#
+while getopts ":c:w:e:" opt;
+  do
+  case $opt in
+
+    c)
+      CRIT="$OPTARG"
+      ;;
+    w)
+      WARN="$OPTARG"
+      ;;
+    e)
+      EMAIL="$OPTARG"
+      ;;
+    \?)
+      echo "Invalid parameter: -$OPTARG"
+      Usage
+      ;;
+  esac
+done
+
+shift "$((OPTIND-1))"
+
+TOTAL_MEMORY=$( free | grep Mem: | awk '{ print $2 }' )		# Grabs total memory value from free command
+USED_MEMORY=$( free | grep Mem: | awk '{print $3}' )		# Grabs used memory value from free command
