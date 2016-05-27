@@ -62,6 +62,9 @@ echo
 # exit 2
 if [ "$USED_MEMORY" -ge "$CRITICAL" ]
 then
+  ps aux --sort -rss | head -n 11 | awk '{print $2 "\t" $11}' > process.txt
+  mailx -s "$(date +'%Y%m%d %H:%M')" "$EMAIL" < process.txt
+  rm process.txt
   echo "Exit status: 2"
   echo
   exit 2
