@@ -44,5 +44,8 @@ fi
 TOTAL_MEMORY=$( free | grep Mem: | awk '{ print $2 }' )		# Grabs total memory value from free command
 USED_MEMORY=$( free | grep Mem: | awk '{print $3}' )		# Grabs used memory value from free command
 
-let "CRITICAL = $TOTAL_MEMORY * $CRIT / 100"
-echo "Critical threshold = $CRITICAL"
+let "CRITICAL = $TOTAL_MEMORY * $CRIT / 100"		# Calculates for CRITCAL value from given percentage of user and assigns it to variable CRITICAL
+echo "Critical threshold = $CRITICAL"			# Prints the value of CRITICAL
+
+let "WARNING = $TOTAL_MEMORY * $WARN / 100"		# Calculates for WARNING value from given percentage of user and assigns it to variable WARNING
+echo "Warning threshold = $WARNING"			# Prints the value of WARNING
