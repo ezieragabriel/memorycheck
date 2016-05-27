@@ -36,7 +36,7 @@ done
 shift "$((OPTIND-1))"
 #
 # Checks if user provided the parameters and if critical threshold is greater than warning threshold
-if [ [ -z "${CRIT}" ] || [ -z "${WARN}" ] || [ -z "${EMAIL}" ] || [ "${CRIT}" -lt "${WARN}" ] ]
+if [ -z "${CRIT}" ] || [ -z "${WARN}" ] || [ -z "${EMAIL}" ] || [ "${CRIT}" -lt "${WARN}" ]
 then
   Usage
 fi
@@ -59,13 +59,13 @@ echo "Warning threshold = $WARNING"			# Prints the value of WARNING
 #
 # Exit conditions
 # exit 2
-if [ $USED_MEMORY -ge $CRITICAL]
+if [ $USED_MEMORY -ge $CRITICAL ]
 then
   exit 2
 fi
 #
 # exit 1
-if [ [ $USED_MEMORY -ge $WARNING ] && [$USED_MEMORY -le $CRITICAL] ]
+if [ $USED_MEMORY -ge $WARNING ] && [ $USED_MEMORY -le $CRITICAL ]
 then
   exit 1
 fi
