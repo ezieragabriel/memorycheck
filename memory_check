@@ -7,7 +7,7 @@ clear			# Clears screen
 Usage() {
   echo $"$0 -c -w -e" 1>&2;
   echo $"memory_check Parameters: -c, Critical threshold; -w, Warning threshold; -e, Recipient mail address" 1>&2;
-  echo exit 1;
+  exit 1;
 }
 #
 #
@@ -35,7 +35,7 @@ while getopts ":c:w:e:" opt;
 done
 shift "$((OPTIND-1))"
 
-if (( -z "${c}")) || (( -z "${w}")) || (( -z "${e}")) || (( "${c}" -lt "${w}"));
+if [ -z "${c}" ] || [ -z "${w}" ] || [ -z "${e}" ] || [ "${c}" -lt "${w}" ];
 then
   Usage
 fi
