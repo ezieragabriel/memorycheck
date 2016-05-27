@@ -1,8 +1,8 @@
 #!/bin/bash
-
+#
 # SE Exercise 1/2
 #BASH
-
+#
 clear			# Clears screen
 Usage() {
   echo $"$0 -c -w -e" 1>&2;
@@ -34,16 +34,16 @@ while getopts ":c:w:e:" opt;
   esac
 done
 shift "$((OPTIND-1))"
-
+#
 # Checks if user provided the parameters and if critical threshold is greater than warning threshold
-if [ -z "${CRIT}" ] || [ -z "${WARN}" ] || [ -z "${EMAIL}" ] || [ "${CRIT}" -lt "${WARN}" ];
+if [ [ -z "${CRIT}" ] || [ -z "${WARN}" ] || [ -z "${EMAIL}" ] || [ "${CRIT}" -lt "${WARN}" ] ]
 then
   Usage
 fi
-
+#
 TOTAL_MEMORY=$( free | grep Mem: | awk '{ print $2 }' )		# Grabs total memory value from free command
 USED_MEMORY=$( free | grep Mem: | awk '{print $3}' )		# Grabs used memory value from free command
-
+#
 echo
 echo "  MEMORY CHECK"
 echo
@@ -52,6 +52,26 @@ echo " Used memory = $USED_MEMORY"			# Prints used memory
 echo
 let "CRITICAL = $TOTAL_MEMORY * $CRIT / 100"		# Calculates for CRITCAL value from given percentage of user and assigns it to variable CRITICAL
 echo "Critical threshold = $CRITICAL"			# Prints the value of CRITICAL
-
+#
 let "WARNING = $TOTAL_MEMORY * $WARN / 100"		# Calculates for WARNING value from given percentage of user and assigns it to variable WARNING
 echo "Warning threshold = $WARNING"			# Prints the value of WARNING
+#
+#
+# Exit conditions
+# exit 2
+if [ $USED_MEMORY -ge $CRITICAL]
+then
+  exit 2
+fi
+#
+# exit 1
+if [ [ $USED_MEMORY -ge $WARNING ] && [$USED_MEMORY -le $CRITICAL] ]
+then
+  exit 1
+fi
+#
+# exit 0
+if [ $USED_MEMORY -lt $WARNING ]
+then
+  exit 0
+fi
