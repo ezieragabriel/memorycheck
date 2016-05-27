@@ -19,16 +19,16 @@ while getopts ":c:w:e:" opt;
   case $opt in
 
     c)
-      CRIT="$OPTARG"
+      CRIT="$OPTARG"		# variable CRIT, critical threshold
       ;;
     w)
-      WARN="$OPTARG"
+      WARN="$OPTARG"		# variable WARN, warning threshold
       ;;
     e)
-      EMAIL="$OPTARG"
+      EMAIL="$OPTARG"		# variable EMAIL, recipient email address
       ;;
     \?)
-      echo "Invalid parameter: -$OPTARG"
+      echo "Invalid parameter: -$OPTARG"		# if variable parameter was pressed
       Usage
       ;;
   esac
