@@ -5,8 +5,8 @@
 #
 clear			# Clears screen
 Usage() {
-  echo $"$0 -c -w -e" 1>&2;
-  echo $"memory_check Parameters: -c, Critical threshold; -w, Warning threshold; -e, Recipient mail address" 1>&2;
+  echo $"Base name: $0 -c -w -e"
+  echo $"memory_check Parameters: -c, Critical threshold; -w, Warning threshold; -e, Recipient mail address"
   exit 1;
 }
 #
